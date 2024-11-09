@@ -1,0 +1,47 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo" class="bg-gray-100">
+    <ActionBar title="Flight Booking" class="bg-blue-600 text-white" />
+    
+    <ScrollView>
+        <StackLayout class="p-4 space-y-4">
+            <!-- Search Form -->
+            <Label text="From" class="text-lg font-semibold text-gray-700" />
+            <ListView items="{{ airports }}" selectedIndex="{{ selectedFromAirport }}" 
+                    class="bg-white rounded-lg p-2 h-32">
+                <ListView.itemTemplate>
+                    <Label text="{{ city }} ({{ code }})" class="p-2" />
+                </ListView.itemTemplate>
+            </ListView>
+
+            <Label text="To" class="text-lg font-semibold text-gray-700" />
+            <ListView items="{{ airports }}" selectedIndex="{{ selectedToAirport }}"
+                    class="bg-white rounded-lg p-2 h-32">
+                <ListView.itemTemplate>
+                    <Label text="{{ city }} ({{ code }})" class="p-2" />
+                </ListView.itemTemplate>
+            </ListView>
+
+            <Label text="Date" class="text-lg font-semibold text-gray-700" />
+            <DatePicker date="{{ selectedDate }}" class="bg-white rounded-lg p-2" />
+
+            <Button text="Search Flights" tap="{{ searchFlights }}" 
+                    class="bg-blue-600 text-white font-bold py-3 rounded-lg" />
+
+            <!-- Flight Results -->
+            <ListView items="{{ flights }}" class="bg-white rounded-lg">
+                <ListView.itemTemplate>
+                    <GridLayout columns="*, auto" rows="auto, auto" class="p-4 border-b border-gray-200">
+                        <StackLayout row="0" col="0">
+                            <Label text="{{ airline }}" class="font-bold text-lg" />
+                            <Label text="{{ flightNumber }}" class="text-gray-600" />
+                        </StackLayout>
+                        <Label text="{{ price, '$%.2f' }}" row="0" col="1" class="text-xl font-bold text-blue-600" />
+                        <StackLayout row="1" col="0" colSpan="2" class="mt-2">
+                            <Label text="{{ from + ' → ' + to }}" class="text-gray-700" />
+                            <Label text="{{ departureDate, 'HH:mm' }}" class="text-gray-600" />
+                        </StackLayout>
+                    </GridLayout>
+                </ListView.itemTemplate>
+            </ListView>
+        </StackLayout>
+    </ScrollView>
+</Page>
